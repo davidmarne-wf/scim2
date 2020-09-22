@@ -22,6 +22,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.unboundid.scim2.common.messages.ListResponse;
 import com.unboundid.scim2.common.types.ResourceTypeResource;
+import com.unboundid.scim2.common.types.UserResource;
 import com.unboundid.scim2.common.utils.JsonUtils;
 import org.testng.annotations.Test;
 
@@ -124,4 +125,15 @@ public class ListResponseTestCase
             readValue(serialized),
         response);
   }
+
+  @Test
+  public void testListResponseAllArgsConstructor()
+      throws Exception
+    {
+      ListResponse<UserResource> listResponse = new ListResponse(0, List.of(), 0, 0);  
+      assertEquals(listResponse.getTotalResults(), 2);
+      assertEquals(listResponse.getStartIndex(), Integer.valueOf(1));
+      assertEquals(listResponse.getItemsPerPage(), Integer.valueOf(3));
+      assertEquals(listResponse.getResources().size(), 0);
+    }
 }
